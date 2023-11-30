@@ -1,0 +1,16 @@
+services:
+  backend_rails_api:
+    container_name: backend_rails_api
+    build: ./
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/usr/src/
+    expose:
+      - "3000"
+    ports:
+      - 3000:3000
+    stdin_open: true
+    tty: true
+    environment:
+      SECRET_KEY_BASE: <%= ENV["SECRET_KEY_BASE"] %>
+      RAILS_ENV: production
